@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
+import Constants from "expo-constants";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -12,21 +13,17 @@ type UserInfo = {
   photoUrl: string;
 };
 
-//  androidClientId: "836340725274-ok7aouh88d1j9okler8qld4oq2223ujp.apps.googleusercontent.com",
-//  iosClientId: "836340725274-mlgo9i8l3jg2ao7l5kpcm5efc2h5vvkd.apps.googleusercontent.com",
-//  expoClientId: "836340725274-9gg2ge959h4cpf9d929m3n6b4sn8pru8.apps.googleusercontent.com",
-
 export default function UserInfo() {
   const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const expoClientId = Constants.expoConfig.extra?.expoClientId;
+  const iosClientId = Constants.expoConfig.extra?.iosClientId;
+  const androidClientId = Constants.expoConfig.extra?.androidClientId;
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    expoClientId:
-      "836340725274-9gg2ge959h4cpf9d929m3n6b4sn8pru8.apps.googleusercontent.com",
-    iosClientId:
-      "836340725274-mlgo9i8l3jg2ao7l5kpcm5efc2h5vvkd.apps.googleusercontent.com",
-    androidClientId:
-      "836340725274-ok7aouh88d1j9okler8qld4oq2223ujp.apps.googleusercontent.com",
+    expoClientId: expoClientId,
+    iosClientId: iosClientId,
+    androidClientId: androidClientId,
   });
 
   useEffect(() => {

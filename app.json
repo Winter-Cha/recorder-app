@@ -32,6 +32,11 @@
     },
     "plugins": [
       "expo-localization"
-    ]
+    ],
+    "extra": {
+      "iosClientId": "",
+      "androidClientId": "",
+      "expoClientId": "",
+    }
   }
 }
